@@ -1,0 +1,117 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Agbalumo&family=Poppins:wght@300;400;500;600;700&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Spinnaker&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Spinnaker&family=Tillana:wght@400;500;600;700;800&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style-type: none;
+  outline: none;
+  font-family: "Spinnaker", sans-serif;
+}
+
+.light {
+  --second: #6366f1; /* Modern indigo */
+  --third: #f8fafc;
+  --hover: #e0e7ff;
+  --main: #a5b4fc;
+  --accent: #10b981; /* Green for AI features */
+  --warning: #f59e0b;
+}
+
+.dark {
+  --second: #818cf8;
+  --third: #0f172a;
+  --text: rgb(241, 245, 249);
+  --hover: #1e293b;
+  --main: #334155;
+  --accent: #34d399;
+  --warning: #fbbf24;
+}
+::selection {
+  background-color: var(--second);
+  color: var(--third);
+}
+h1 {
+  color: var(--second);
+}
+h1.logo {
+  font-family: "Tillana", system-ui;
+  cursor: pointer;
+}
+h1.logo:hover {
+  text-decoration: none;
+}
+.logo span {
+  display: inline-block;
+  font-size: 32px;
+  margin-right: 8px;
+  animation: pulse 2s infinite;
+}
+
+.ai-badge {
+  background: linear-gradient(45deg, var(--accent), var(--second));
+  color: white;
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 8px;
+  margin-left: 8px;
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+@keyframes glow {
+  from { box-shadow: 0 0 5px var(--accent); }
+  to { box-shadow: 0 0 20px var(--accent), 0 0 30px var(--accent); }
+}
+
+button, .button {
+  text-align: center;
+  padding: 15px 25px;
+  width: 180px;
+  border-radius: 30px;
+  font-size: 15px;
+  border: none;
+  background-color: var(--second);
+  border: 2px solid var(--second);
+  color: var(--third);  
+}
+button:hover, .button:hover {
+  border: 2px solid var(--text);  
+  text-decoration: none;
+}
+button:active, .button:active {
+  scale: 0.99;
+}
+.button {
+  width: 100%;
+  padding: 10px 0;
+}
+button.loading, .button.loading {
+  opacity: 0.7;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+.button.outline {
+  background-color: transparent;
+  text-decoration: none;
+}
+main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100dvh;
+  flex-direction: column;
+  gap: 25px;
+}
+main h3 {
+  max-width: 800px;
+  width: 100%;
+  text-align: center;
+}

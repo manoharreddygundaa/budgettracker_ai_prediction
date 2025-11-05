@@ -1,0 +1,99 @@
+.user-content .top {
+    display: flex;
+    width: calc(100% - 280px);
+    padding: 15px;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 2px solid var(--hover);
+    color: var(--text);
+    position: fixed;
+    top: 0;
+    left: 280px;
+    background-color: var(--third);
+    z-index: 10;
+}
+.user-content .top .title {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 5px;
+    color: var(--text);
+}
+
+.developer-badge {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    font-size: 12px;
+    opacity: 0.8;
+}
+
+.developer-badge strong {
+    color: var(--second);
+    font-weight: 600;
+}
+
+.ai-powered {
+    background: linear-gradient(45deg, var(--accent), var(--second));
+    color: white;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 10px;
+    font-weight: 600;
+    animation: pulse-glow 3s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+    0%, 100% { 
+        box-shadow: 0 0 5px var(--accent);
+        transform: scale(1);
+    }
+    50% { 
+        box-shadow: 0 0 15px var(--accent), 0 0 25px var(--accent);
+        transform: scale(1.05);
+    }
+}
+.profile{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: left;
+    height: max-content;
+    padding: 0px 15px;
+}
+.profile i {
+    font-size: 35px;
+    color: var(--second);
+}
+.profile div {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    align-items: left;
+    justify-content: center;
+    
+}
+.profile div p {
+    font-size: 15px;
+    color: var(--second);
+}
+.profile div p:last-of-type {
+    color: gray;
+    font-size: 12px;
+}
+@media all and (max-width: 768px) {
+    .user-content .top .profile{
+       display: none;
+    }
+    .user-content .top .title h1 {
+       margin-left: 40px;
+       font-size: 20px;
+    }
+    .user-content .top  {
+        left: 0;
+        width: 100%;
+        justify-content: left;
+        background-color: aqua;
+    }
+}
