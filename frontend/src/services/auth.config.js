@@ -1,3 +1,3 @@
-const API_BASE_URL = process.env.REACT_APP_API_URL + "/mywallet";
+const API_BASE_URL = process.env.REACT_APP_API_URL;
 
 export default API_BASE_URL;
