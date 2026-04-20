@@ -52,23 +52,45 @@ public class WebSecurityConfig {
     }
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.csrf(AbstractHttpConfigurer::disable)
-                .cors(cors -> cors.configure(http))
-                .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authorizeHttpRequests(auth ->
-                        auth.requestMatchers("/mywallet/auth/**").permitAll()
-                                .requestMatchers("/mywallet/export/**", "/export/**", "/api/export/**").authenticated()
-                                .requestMatchers("/mywallet/transactiontype/**", "/mywallet/category/**", 
-                                        "/mywallet/transaction/**", "/mywallet/user/**", "/api/savings/**", 
-                                        "/budget/**", "/forum/**", "/predictions/**", "/saved/**", "/report/**").permitAll()
-                                .anyRequest().authenticated()
-                );
+public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    http
+        .csrf(AbstractHttpConfigurer::disable)
+        .cors(cors -> cors.configure(http))
+        .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
+        .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+        .authorizeHttpRequests(auth ->
+            auth
+                // ✅ PUBLIC AUTH ENDPOINTS (VERY IMPORTANT)
+                .requestMatchers(
+                        "/auth/**",
+                        "/api/auth/**",
+                        "/mywallet/auth/**"
+                ).permitAll()
 
-        http.authenticationProvider(authenticationProvider());
-        http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+                // ✅ PROTECTED (example - keep if needed)
+                .requestMatchers("/mywallet/export/**", "/export/**", "/api/export/**").authenticated()
 
-        return http.build();
-    }
+                // ⚠️ TEMP: allow other APIs (you can secure later)
+                .requestMatchers(
+                        "/mywallet/transactiontype/**",
+                        "/mywallet/category/**",
+                        "/mywallet/transaction/**",
+                        "/mywallet/user/**",
+                        "/api/savings/**",
+                        "/budget/**",
+                        "/forum/**",
+                        "/predictions/**",
+                        "/saved/**",
+                        "/report/**"
+                ).permitAll()
+
+                // 🔒 everything else protected
+                .anyRequest().authenticated()
+        );
+
+    http.authenticationProvider(authenticationProvider());
+    http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+
+    return http.build();
+}
 }
