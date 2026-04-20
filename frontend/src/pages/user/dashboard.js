@@ -16,8 +16,8 @@ function Dashboard() {
     const months = getMonths()
     const [currentMonth, setMonth] = useState(months[0])
 
-    const [total_expense, total_income, cash_in_hand, no_of_transactions, categorySummary, budgetAmount,
-        saveBudget, isLoading, isError] = useDashboard(currentMonth)
+    const [total_expense = 0, total_income = 0, cash_in_hand = 0, no_of_transactions = 0, categorySummary = [], budgetAmount = 0,
+        saveBudget, isLoading = true, isError = false] = useDashboard(currentMonth)
 
     const onMonthChange = (id) => {
         const month = months.find(m => m.id == id)
@@ -26,33 +26,69 @@ function Dashboard() {
 
     return (
         <Container activeNavId={0}>
-            <Header title="Dashboard" />
-            <Toaster/>
-            {(isLoading) && <Loading />}
-            {(isError) && toast.error("Failed to fetch information. Try again later!")}
-            {(!isError) && <SelectMonth months={months} onMonthChange={onMonthChange} />}
-            {(!isLoading &&  total_expense === 0) && <Info text={"You have no expenses in this month!"} />}
-            {
-                (!isError && total_expense !== 0) && <>
-                    <div className="ai-hero-section">
-                        <ExpensePrediction />
+            <div className="modern-dashboard">
+                <Header title="Dashboard" />
+                <Toaster/>
+                
+                <div className="dashboard-content">
+                    {(isLoading) && <Loading />}
+                    
+                    <div className="dashboard-controls">
+                        <SelectMonth months={months} onMonthChange={onMonthChange} />
                     </div>
-                    <DashboardDetailBox total_expense={total_expense} total_income={total_income} cash_in_hand={cash_in_hand} no_of_transactions={no_of_transactions} />
-                    <div className='dashboard-chart'>
-                        <CategoryExpenseChart categorySummary={categorySummary} />
-                        <Budget totalExpense={total_expense} budgetAmount={budgetAmount} saveBudget={saveBudget} currentMonth={currentMonth} />
-                    </div>
-                </>
-            }
-            {
-                (!isError && total_expense === 0) && <>
-                    <div className="ai-hero-section">
-                        <ExpensePrediction />
-                    </div>
-                </>
-            }
-        </Container>
+                    
 
+                    
+                    {/* AI Prediction Section */}
+                    <div className="ai-prediction-section">
+                        <ExpensePrediction currentMonth={currentMonth} />
+                    </div>
+                    
+                    {(!isLoading && total_expense === 0 && total_income === 0) && (
+                        <Info text={"You have no transactions in this month!"} />
+                    )}
+                    
+                    {/* Top Section - 4 Summary Cards Horizontal */}
+                    <div className="stats-section">
+                        <DashboardDetailBox 
+                            total_expense={total_expense || 0} 
+                            total_income={total_income || 0} 
+                            cash_in_hand={cash_in_hand || 0} 
+                            no_of_transactions={no_of_transactions || 0} 
+                        />
+                    </div>
+                    
+                    {/* Charts Section - Side by Side */}
+                    <div className="charts-section-grid">
+                        <div className="chart-container">
+                            <h3 className="chart-title">📊 Category Expenses</h3>
+                            <div style={{marginTop: '20px'}}>
+                                {categorySummary && categorySummary.length > 0 ? (
+                                    <CategoryExpenseChart categorySummary={categorySummary} />
+                                ) : (
+                                    <div className="chart-placeholder">
+                                        <i className="fas fa-chart-pie"></i>
+                                        <p>No expense data available for this month</p>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+                        
+                        <div className="chart-container">
+                            <h3 className="chart-title">💰 Monthly Budget</h3>
+                            <div style={{marginTop: '20px'}}>
+                                <Budget 
+                                    totalExpense={total_expense} 
+                                    budgetAmount={budgetAmount} 
+                                    saveBudget={saveBudget} 
+                                    currentMonth={currentMonth} 
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </Container>
     )
 }
 
@@ -76,15 +112,14 @@ function getMonths() {
 
 function SelectMonth({ months, onMonthChange }) {
     return (
-        <div>
-            <select onChange={(e) => onMonthChange(e.target.value)}>
-                {
-                    months.map((m) => {
-                        return (
-                            <option value={m.id} key={m.id}>{m.monthName} {m.year}</option>
-                        )
-                    })
-                }
+        <div className="month-selector">
+            <label>📅 View Data For:</label>
+            <select onChange={(e) => onMonthChange(e.target.value)} className="modern-select">
+                {months.map((m) => (
+                    <option value={m.id} key={m.id}>
+                        {m.monthName} {m.year}
+                    </option>
+                ))}
             </select>
         </div>
     )

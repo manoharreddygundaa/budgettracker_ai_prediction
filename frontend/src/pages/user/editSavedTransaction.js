@@ -6,7 +6,7 @@ import Header from '../../components/utils/header';
 import useCategories from '../../hooks/useCategories';
 import Loading from '../../components/utils/loading';
 import Info from '../../components/utils/Info';
-import Container from '../../components/utils/Container';
+
 import toast from 'react-hot-toast';
 import SavedTransactionForm from '../../components/userTransactions/SavedTransactionForm';
 
@@ -95,7 +95,7 @@ function EditSavedTransaction() {
     }
 
     return (
-        <Container activeNavId={11}>
+        <>
             <Header title="Edit Saved Transaction" />
             {(isFetching) && <Loading />}
             {(!isFetching && categories.length === 0) && <Info text="No data found!" />}
@@ -118,7 +118,7 @@ function EditSavedTransaction() {
                     </>
                 )
             }
-        </Container>
+        </>
     )
 }
 

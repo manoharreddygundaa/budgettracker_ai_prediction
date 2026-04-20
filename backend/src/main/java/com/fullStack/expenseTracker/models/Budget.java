@@ -17,13 +17,17 @@ public class Budget {
     @GeneratedValue(strategy = GenerationType.AUTO)
     long budgetId;
     long userId;
+    String category;
     double amount;
+    double spent;
     int month;
     long year;
 
-    public Budget(long userId, double amount, int month, long year) {
+    public Budget(long userId, String category, double amount, double spent, int month, long year) {
         this.userId = userId;
+        this.category = category;
         this.amount = amount;
+        this.spent = spent;
         this.month = month;
         this.year = year;
     }

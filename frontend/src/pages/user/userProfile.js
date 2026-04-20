@@ -3,7 +3,6 @@ import AuthService from "../../services/auth.service";
 import ProfileCard from "../../components/userProfile/userProfileCard";
 import Header from '../../components/utils/header';
 import ChangePassword from "../../components/userProfile/changePassword";
-import Container from "../../components/utils/Container";
 import { Toaster } from "react-hot-toast";
 
 function UserProfile() {
@@ -21,12 +20,20 @@ function UserProfile() {
     }, [])
 
     return (
-        <Container activeNavId={3}>
+        <div className="profile-container">
             <Header title="Settings" />
             <Toaster/>
-            <ProfileCard username={username} email={email} />
-            <ChangePassword email={email} />
-        </Container>
+            <div className="profile-grid">
+                <div className="profile-info-card">
+                    <h3 className="profile-card-title">Profile Information</h3>
+                    <ProfileCard username={username} email={email} />
+                </div>
+                <div className="profile-security-card">
+                    <h3 className="profile-card-title">Security Settings</h3>
+                    <ChangePassword email={email} />
+                </div>
+            </div>
+        </div>
     )
 }
 

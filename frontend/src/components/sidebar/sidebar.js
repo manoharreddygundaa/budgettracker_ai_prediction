@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import AuthService from '../../services/auth.service';
 import '../../assets/styles/sidebar.css'
 import SideBarLinks from './sideBarLinks';
@@ -10,8 +10,12 @@ import Logo from '../utils/Logo';
 function Sidebar({ activeNavId }) {
 
     const [isSideBarOpen, setIsSideBarOpen] = useState(false);
-
+    const location = useLocation();
     const navigate = useNavigate();
+
+    const isActiveLink = (linkTo) => {
+        return location.pathname === linkTo;
+    };
 
     const logout = () => {
         AuthService.logout_req();
@@ -21,8 +25,10 @@ function Sidebar({ activeNavId }) {
 
     return (
         <div className={(isSideBarOpen) ? "side-bar open" : "side-bar"}>
-            <div style={{ padding: '15px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                <Logo/>
+            <div style={{ padding: '25px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: '1px solid rgba(255, 255, 255, 0.2)' }}>
+                <div className="logo-container">
+                    <Logo/>
+                </div>
                 <span onClick={() => setIsSideBarOpen(false)} className='mobile'><i className="fa fa-times" aria-hidden='true'></i></span>
                 <span onClick={() => setIsSideBarOpen(true)} className='mobile menu'><i className="fa fa-bars" aria-hidden='true'></i></span>
             </div>
@@ -35,16 +41,18 @@ function Sidebar({ activeNavId }) {
                             return (
                                 <Link key={link.id} className='nav-link' to={link.to}>
                                     <li
-                                        className={activeNavId === link.id ? "active" : ""}
+                                        className={isActiveLink(link.to) ? "active" : ""}
                                     >
-                                        <i class={link.icon} aria-hidden='true'></i>
+                                        <i className={link.icon} aria-hidden='true'></i>
                                         {link.name}
                                     </li>
                                 </Link>
                             );
                         })
                 }
-                <span onClick={logout}><Link className='nav-link'><li><i class="fa fa-sign-out" aria-hidden="true"></i>Log out</li></Link></span>
+                <div className="logout-item">
+                    <span onClick={logout}><Link className='nav-link'><li><i className="fa fa-sign-out" aria-hidden="true"></i>Log out</li></Link></span>
+                </div>
             </ul>
             <AuthVerify logOut={logout}/>
 

@@ -24,7 +24,8 @@ function Register() {
                 console.log(response);
                 if (response.data.status === "SUCCESS"){
                     setResponseError("");
-                    navigate(`/auth/userRegistrationVerfication/${data.email}`);
+                    localStorage.setItem("message", JSON.stringify({ status: "SUCCESS", text: "Registration successful! You can now login." }));
+                    navigate('/auth/login');
                 }
                 else {
                     setResponseError("Registration failed: Something went wrong!")
@@ -48,14 +49,15 @@ function Register() {
         <div className='container'>
             <form className="auth-form"  onSubmit={handleSubmit(onSubmit)}>
                 <Logo/>
-                <h2>Register</h2>
+                <h2>Join SmartFinance! 🚀</h2>
                 {
                     (response_error!=="") && <p>{response_error}</p>
                 }
                 <div className='input-box'>
-                    <label>Username</label><br/>
+                    <label>👤 Username</label>
                     <input 
                         type='text'
+                        placeholder="Choose a username"
                         {...register('username', {
                             required: "Username is required!"
                         })}
@@ -64,9 +66,10 @@ function Register() {
                 </div>
                 
                 <div className='input-box'>
-                    <label>Email</label><br/>
+                    <label>📧 Email Address</label>
                     <input 
-                        type='text'
+                        type='email'
+                        placeholder="Enter your email"
                         {...register('email', {
                             required: "Email is required!",
                             pattern: {value:/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g, message:"Invalid email address!"}
@@ -76,9 +79,10 @@ function Register() {
                 </div>
                 
                 <div className='input-box'>
-                    <label>Password</label><br/>
+                    <label>🔒 Password</label>
                     <input 
                         type='password'
+                        placeholder="Create a strong password"
                         {
                             ...register('password', {
                                 required: 'Password is required!',
@@ -93,9 +97,10 @@ function Register() {
                 </div>
                 
                 <div className='input-box'>
-                    <label>Confirm Password</label><br/>
+                    <label>🔐 Confirm Password</label>
                     <input 
                         type='password'
+                        placeholder="Confirm your password"
                         {
                             ...register('cpassword', {
                                 required: 'Confirm password is required!',
@@ -111,12 +116,14 @@ function Register() {
                 </div>
                 
                 <div className='input-box'>
-                    <input type='submit' value={isLoading ? "Please wait" : 'Register'}
-                     className={isLoading ? "button button-fill loading" : "button button-fill"}
+                    <input type='submit' value={isLoading ? "Creating Account..." : 'Create Account'}
+                        className={isLoading ? "loading" : ""}
+                        disabled={isLoading}
                     />
                 </div>
-                <br/><div className='msg'>By clicking Register, you are agree to our user agreement, privacy policy, and cookie policy.</div>
-                <br/><div className='msg'>Already a member? <Link to='/auth/login'  className='inline-link'>Login Here</Link></div>
+                
+                <div className='msg'>By creating an account, you agree to our terms and privacy policy.</div>
+                <div className='msg'>Already have an account? <Link to='/auth/login'>Sign In</Link></div>
             </form>
         </div>
     )

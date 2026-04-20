@@ -51,7 +51,7 @@ function SavedTransactionForm({categories, onSubmit, isDeleting, isSaving, trans
                                         {...register('category', {
                                             required: "category is required"
                                         })}
-                                    /><label for={cat.categoryName}>{cat.categoryName}</label>
+                                    /><label htmlFor={cat.categoryName}>{cat.categoryName}</label>
                                 </span>
                             )
                         })
@@ -114,8 +114,10 @@ function SavedTransactionForm({categories, onSubmit, isDeleting, isSaving, trans
             <div className='t-btn input-box'>
                 <input type='submit' value={isSaving ? "Saving..." : 'Save transaction'}
                     className={isSaving ? "button button-fill loading" : "button button-fill"} />
+                <button type='button' className='button button-fill' onClick={() => navigate('/user/newTransaction')}>
+                    Add New
+                </button>
                 <input type='submit' className='button outline' value='Cancel' onClick={(e) => cancelProcess(e)} />
-
             </div>
             {
                 transaction ?

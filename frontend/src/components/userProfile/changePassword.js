@@ -31,10 +31,9 @@ function ChangePassword({email}) {
     }
 
     return(
-        <form className="auth-form t-form"  onSubmit={handleSubmit(onSubmit)}>
-
-            <div className='input-box'>
-                <label>Current Password</label><br/>
+        <form className="security-form" onSubmit={handleSubmit(onSubmit)}>
+            <div className='security-input-group'>
+                <label>Current Password</label>
                 <input 
                     type='password'
                     {
@@ -50,8 +49,8 @@ function ChangePassword({email}) {
                 {formState.errors.currentPassword && <small>{formState.errors.currentPassword.message}</small>}
             </div>
 
-            <div className='input-box'>
-                <label>Password</label><br/>
+            <div className='security-input-group'>
+                <label>New Password</label>
                 <input 
                     type='password'
                     {
@@ -67,8 +66,8 @@ function ChangePassword({email}) {
                 {formState.errors.newPassword && <small>{formState.errors.newPassword.message}</small>}
             </div>
                 
-            <div className='input-box'>
-                <label>Confirm Password</label><br/>
+            <div className='security-input-group'>
+                <label>Confirm New Password</label>
                 <input 
                     type='password'
                     {
@@ -85,14 +84,15 @@ function ChangePassword({email}) {
                 {formState.errors.cpassword && <small>{formState.errors.cpassword.message}</small>}
             </div>
 
-            <div className='t-btn input-box'>
-                {/* <input type='submit' value={isLoading ? "Updating..." : 'Update password'}
-                    className={isLoading ? "button button-fill loading" : "button button-fill"}/> */}
-                {/* <input type='submit' className='button outline' value='Cancel' onClick={() => navigate('/user/transactions')}/> */}
-                <input type='submit' value={isLoading ? "Updating..." : 'Update password'}
-                    className={isLoading ? "button button-fill loading" : "button button-fill"} />
+            <div className='security-actions'>
+                <button 
+                    type='submit' 
+                    className={`security-btn ${isLoading ? 'loading' : ''}`}
+                    disabled={isLoading}
+                >
+                    {isLoading ? "Updating..." : 'Update Password'}
+                </button>
             </div>
-            
         </form>
     )
 }

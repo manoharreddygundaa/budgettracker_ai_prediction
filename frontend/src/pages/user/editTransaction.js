@@ -8,7 +8,7 @@ import Header from '../../components/utils/header';
 import useCategories from '../../hooks/useCategories';
 import Loading from '../../components/utils/loading';
 import Info from '../../components/utils/Info';
-import Container from '../../components/utils/Container';
+
 import toast from 'react-hot-toast';
 
 const transactionTypes = [{ 'id': 1, 'name': 'Expense' }, { 'id': 2, 'name': 'Income' }]
@@ -96,7 +96,7 @@ function EditTransaction() {
     }
 
     return (
-        <Container activeNavId={1}>
+        <>
             <Header title="Edit Transaction" />
             {(isFetching) && <Loading />}
             {(!isFetching && categories.length === 0) && <Info text="No data found!" />}
@@ -119,7 +119,7 @@ function EditTransaction() {
                     </>
                 )
             }
-        </Container>
+        </>
     )
 }
 

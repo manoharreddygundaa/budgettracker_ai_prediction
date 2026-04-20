@@ -57,13 +57,12 @@ public class AuthServiceImpl implements AuthService {
         }
 
         try {
-            User user = createUser(signUpRequestDto);
+            User user = createUserWithoutVerification(signUpRequestDto);
 
             userRepository.save(user);
-            notificationService.sendUserRegistrationVerificationEmail(user);
 
             return ResponseEntity.status(HttpStatus.CREATED).body(new ApiResponseDto<>(
-                    ApiResponseStatus.SUCCESS, HttpStatus.CREATED,"Verification email has been successfully sent!"
+                    ApiResponseStatus.SUCCESS, HttpStatus.CREATED,"Registration successful! You can now login."
             ));
 
         }catch(Exception e) {
@@ -217,6 +216,18 @@ public class AuthServiceImpl implements AuthService {
                 generateVerificationCode(),
                 calculateCodeExpirationTime(),
                 false,
+                determineRoles(signUpRequestDto.getRoles())
+        );
+    }
+
+    private User createUserWithoutVerification(SignUpRequestDto signUpRequestDto) throws RoleNotFoundException {
+        return new User(
+                signUpRequestDto.getUserName(),
+                signUpRequestDto.getEmail(),
+                passwordEncoder.encode(signUpRequestDto.getPassword()),
+                null,
+                null,
+                true,
                 determineRoles(signUpRequestDto.getRoles())
         );
     }

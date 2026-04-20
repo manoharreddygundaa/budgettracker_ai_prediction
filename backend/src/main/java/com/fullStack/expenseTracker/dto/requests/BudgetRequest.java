@@ -7,5 +7,9 @@ import lombok.Data;
 @AllArgsConstructor
 public class BudgetRequest {
     long userId;
+    String category;
     double amount;
+    double spent;
+    int month;
+    long year;
 }

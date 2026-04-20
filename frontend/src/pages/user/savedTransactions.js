@@ -96,33 +96,36 @@ function SavedTransactionList({ list, saveTransaction, skipTransaction }) {
          { list.map(t => {
             return (
                 t.dueInformation && <div className='st-card' key={t.planId}>
-                <div className='topic'>
-                    <h4>{t.categoryName}</h4>
-                    <h4>{ t.transactionType === 1 ? "- " : "+ " } Rs. {t.amount}</h4>
+                    <div className='st-card-content'>
+                        <div className='st-card-header'>
+                            <h4 className='st-card-category'>{t.categoryName}</h4>
+                            <h4 className='st-card-amount'>{ t.transactionType === 1 ? "- " : "+ " } Rs. {t.amount}</h4>
+                        </div>
+                        <p className='st-card-description'>
+                            {t.description}
+                        </p>
+                        <div className={`st-card-due ${t.dueInformation.includes('overdue') ? 'overdue' : t.dueInformation.includes('Today') ? 'today' : ''}`}>
+                            {t.dueInformation} ({t.frequency}) 
+                            {t.dueInformation.includes('overdue') ? 
+                                <i className='fa fa-exclamation-circle' aria-hidden='true'></i> : 
+                                t.dueInformation.includes('Today') ? 
+                                <i className='fa fa-history' aria-hidden='true'></i> : <></>}
+                        </div>
+                    </div>
+                    <div className='st-card-actions'>
+                        <button 
+                            className='st-action-btn primary'
+                            onClick={() => saveTransaction(t.planId)}
+                        >Confirm</button>
+                        <button 
+                            className='st-action-btn secondary'
+                            onClick={() => skipTransaction(t.planId)}
+                        >Skip</button>
+                        <Link to={`/user/editSavedTransaction/${t.planId}`}>
+                            <button className='st-action-btn secondary'>Edit</button>
+                        </Link>
+                    </div>
                 </div>
-                <p>
-                    {t.description}
-                </p>
-                <p className={t.dueInformation.includes('overdue') ? 'due overdue' : t.dueInformation.includes('Today') ? 'due today' : 'due'}>
-                    {t.dueInformation} ({t.frequency}) 
-                    {t.dueInformation.includes('overdue') ? 
-                        <i className='fa fa-exclamation-circle' aria-hidden='true'></i> : 
-                        t.dueInformation.includes('Today') ? 
-                        <i className='fa fa-history' aria-hidden='true'></i> : <></>}
-                    
-                </p>
-                <div>
-                    <button 
-                        onClick={() => saveTransaction(t.planId)}
-                    >Confirm</button>
-                    <button 
-                        className='button outline'
-                        onClick={() => skipTransaction(t.planId)}
-                    >Skip</button>
-                    <Link to={`/user/editSavedTransaction/${t.planId}`}><button className='button outline'>Edit</button></Link>
-                </div>
-            </div>
-                
             )
         }) }
         </div>

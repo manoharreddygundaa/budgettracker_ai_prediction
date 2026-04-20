@@ -11,6 +11,7 @@ import useCategories from '../../hooks/useCategories';
 import Info from '../../components/utils/Info';
 import Container from '../../components/utils/Container';
 import toast, { Toaster } from 'react-hot-toast';
+import '../../assets/styles/transactionType.css';
 
 const transactionTypes = [{ 'id': 1, 'name': 'Expense' }, { 'id': 2, 'name': 'Income' }]
 

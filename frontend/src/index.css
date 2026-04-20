@@ -13,8 +13,9 @@
 
 .light {
   --second: #6366f1; /* Modern indigo */
-  --third: #f8fafc;
-  --hover: #e0e7ff;
+  --third: #ffffff;
+  --text: #1a202c; /* Dark text for light mode */
+  --hover: #f1f5f9;
   --main: #a5b4fc;
   --accent: #10b981; /* Green for AI features */
   --warning: #f59e0b;
@@ -36,18 +37,50 @@
 h1 {
   color: var(--second);
 }
-h1.logo {
-  font-family: "Tillana", system-ui;
-  cursor: pointer;
+/* Logo Styles */
+.logo-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
-h1.logo:hover {
-  text-decoration: none;
+
+.logo-wrapper:hover {
+    transform: scale(1.05);
 }
-.logo span {
-  display: inline-block;
-  font-size: 32px;
-  margin-right: 8px;
-  animation: pulse 2s infinite;
+
+.logo-icon {
+    font-size: 2rem;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.logo-text {
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin: 0;
+    font-family: 'Tillana', system-ui;
+    letter-spacing: -0.02em;
+    color: var(--second);
+}
+
+.logo-accent {
+    background: linear-gradient(45deg, #ffd89b 0%, #19547b 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Sidebar specific logo styles */
+.side-bar .logo-text {
+    color: white;
+}
+
+.side-bar .logo-accent {
+    background: linear-gradient(45deg, #ffd89b 0%, #ffffff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .ai-badge {

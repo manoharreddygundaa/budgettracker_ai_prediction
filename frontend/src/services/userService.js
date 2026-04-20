@@ -161,13 +161,10 @@ const getBudget = async (month, year) => {
     )
 }
 
-const createBudget = (amount) => {
+const createBudget = (budgetData) => {
     return axios.post(
         API_BASE_URL + '/budget/create', 
-        {
-            userId: AuthService.getCurrentUser().id,
-            amount: amount
-        },
+        budgetData,
         {
             headers: AuthService.authHeader()
         }
@@ -316,6 +313,116 @@ const getExpensePrediction = (monthsAhead = 1) => {
     )
 }
 
+const createSavingsGoal = (goalName, targetAmount, savedAmount, deadline) => {
+    return axios.post(
+        API_BASE_URL + '/api/savings', 
+        {
+            userId: AuthService.getCurrentUser().id,
+            goalName: goalName,
+            targetAmount: targetAmount,
+            savedAmount: savedAmount,
+            deadline: deadline
+        },
+        {
+            headers: AuthService.authHeader()
+        }
+    )
+}
+
+const getSavingsGoals = () => {
+    return axios.get(
+        API_BASE_URL + '/api/savings/user/' + AuthService.getCurrentUser().id, 
+        {
+            headers: AuthService.authHeader()
+        }
+    )
+}
+
+const updateSavingsGoal = (savingsId, goalName, targetAmount, savedAmount, deadline) => {
+    return axios.put(
+        API_BASE_URL + '/api/savings/' + savingsId, 
+        {
+            userId: AuthService.getCurrentUser().id,
+            goalName: goalName,
+            targetAmount: targetAmount,
+            savedAmount: savedAmount,
+            deadline: deadline
+        },
+        {
+            headers: AuthService.authHeader()
+        }
+    )
+}
+
+const deleteSavingsGoal = (savingsId) => {
+    return axios.delete(
+        API_BASE_URL + '/api/savings/' + savingsId, 
+        {
+            headers: AuthService.authHeader()
+        }
+    )
+}
+
+// Forum APIs
+const createForumPost = (postData) => {
+    return axios.post(
+        API_BASE_URL + '/forum/posts',
+        postData,
+        { headers: AuthService.authHeader() }
+    )
+}
+
+const getAllForumPosts = () => {
+    return axios.get(
+        API_BASE_URL + '/forum/posts',
+        { headers: AuthService.authHeader() }
+    )
+}
+
+const togglePostLike = (postId) => {
+    return axios.post(
+        API_BASE_URL + `/forum/posts/${postId}/like`,
+        {},
+        { headers: AuthService.authHeader() }
+    )
+}
+
+const addComment = (postId, content) => {
+    return axios.post(
+        API_BASE_URL + `/forum/posts/${postId}/comments`,
+        { content },
+        { headers: AuthService.authHeader() }
+    )
+}
+
+const getComments = (postId) => {
+    return axios.get(
+        API_BASE_URL + `/forum/posts/${postId}/comments`,
+        { headers: AuthService.authHeader() }
+    )
+}
+
+const deleteForumPost = (postId) => {
+    return axios.delete(
+        API_BASE_URL + `/forum/posts/${postId}`,
+        { headers: AuthService.authHeader() }
+    )
+}
+
+const exportData = async (exportRequest) => {
+    const response = await axios.post(
+        API_BASE_URL + '/api/export',
+        exportRequest,
+        {
+            headers: AuthService.authHeader(),
+            responseType: 'blob'
+        }
+    )
+    return response.data
+}
+
+
+
 const UserService = {
     get_categories,
     add_transaction ,
@@ -340,6 +447,17 @@ const UserService = {
     deleteSavedTransaction,
     addSavedTransaction,
     skipSavedTransaction,
-    getExpensePrediction
+    getExpensePrediction,
+    createSavingsGoal,
+    getSavingsGoals,
+    updateSavingsGoal,
+    deleteSavingsGoal,
+    createForumPost,
+    getAllForumPosts,
+    togglePostLike,
+    addComment,
+    getComments,
+    deleteForumPost,
+    exportData
 }
 export default UserService;

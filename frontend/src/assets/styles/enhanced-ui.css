@@ -1,0 +1,882 @@
+/* === ENHANCED UI/UX DESIGN === */
+
+/* 1. TRANSACTION FORM ENHANCEMENTS */
+.t-form {
+    background-color: #f8fafc;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    max-width: 500px;
+    width: 100%;
+}
+
+.t-form input:not([type='submit'], [type='radio'], [type='file']) {
+    background-color: white;
+    border: 1px solid #e0e7ff;
+    transition: border-color 0.2s;
+}
+
+.t-form input:focus {
+    border-color: #6366f1;
+    box-shadow: 0 0 0 2px #a5b4fc;
+}
+
+/* Category Chip Styling */
+.category-picker {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.category-chip {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    border: 1px solid #a5b4fc;
+    border-radius: 20px;
+    padding: 8px 15px;
+    background-color: white;
+    color: #6366f1;
+    font-size: 14px;
+    transition: all 0.2s;
+    user-select: none;
+}
+
+.category-chip span {
+    pointer-events: none;
+}
+
+.category-chip input[type='radio'] {
+    display: none;
+}
+
+.category-chip input[type='radio']:checked + span {
+    background-color: #6366f1;
+    color: #f8fafc;
+    border-color: #6366f1;
+    padding: 8px 15px;
+    border-radius: 20px;
+    margin: -8px -15px;
+}
+
+.category-chip:hover {
+    background-color: #e0e7ff;
+}
+
+/* Transaction Type Pills */
+.type-select.form div {
+    border-radius: 8px;
+    border: 1px solid #a5b4fc;
+    transition: all 0.2s;
+}
+
+.type-select.form div.active {
+    background-color: #6366f1;
+    color: #f8fafc;
+    border-color: #6366f1;
+}
+
+.type-select.form div:hover {
+    background-color: #e0e7ff;
+    color: #6366f1;
+}
+
+/* 2. SAVED TRANSACTIONS ENHANCEMENTS */
+.st-card {
+    background-color: #f8fafc !important;
+    padding: 15px;
+    flex: 1 1 300px;
+    border-radius: 12px;
+    color: #6366f1;
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    border-left: 5px solid #a5b4fc;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.st-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.st-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 5px;
+    border-bottom: 1px dashed #e0e7ff;
+}
+
+.st-category-name {
+    font-size: 16px;
+    font-weight: 700;
+    margin: 0;
+}
+
+.st-amount {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.st-amount.expense-color {
+    color: #ef4444;
+}
+
+.st-amount.income-color {
+    color: #10b981;
+}
+
+.st-description {
+    color: #666;
+    font-size: 13px;
+    margin: 0;
+}
+
+.st-due-info {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 5px 0;
+    display: flex;
+    align-items: center;
+}
+
+.st-due-info.overdue {
+    color: #ff0000;
+    border: 1px solid #ff0000;
+    border-radius: 5px;
+    padding: 5px 10px;
+    background-color: rgba(255, 0, 0, 0.05);
+}
+
+.st-due-info.today {
+    color: #f59e0b;
+    border: 1px solid #f59e0b;
+    border-radius: 5px;
+    padding: 5px 10px;
+    background-color: rgba(245, 158, 11, 0.05);
+}
+
+.st-due-info.upcoming {
+    color: #6366f1;
+}
+
+.st-actions {
+    margin-top: 10px;
+    display: flex;
+    gap: 10px;
+}
+
+.st-actions button, .st-actions a button {
+    padding: 6px 12px;
+    font-size: 13px;
+    width: auto;
+    border-radius: 6px;
+}
+
+/* 3. SETTINGS PAGE ENHANCEMENTS */
+.settings-layout {
+    display: grid;
+    gap: 30px;
+    margin-top: 30px;
+    grid-template-columns: 1fr 1fr;
+}
+
+.profile-section, .security-section {
+    background-color: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.profile-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.profile-card {
+    background-color: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.profile-card .profile-img img {
+    border: 4px solid #6366f1;
+    outline: none;
+    transition: transform 0.3s;
+}
+
+.profile-card .profile-img:hover img {
+    transform: scale(1.05);
+}
+
+.profile-card .action label {
+    color: #6366f1;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.profile-card .action label:hover {
+    color: #a5b4fc;
+}
+
+.security-header {
+    color: #6366f1;
+    border-bottom: 2px solid #a5b4fc;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    font-size: 18px;
+}
+
+.security-section .t-form {
+    background-color: transparent;
+    padding: 0;
+    box-shadow: none;
+    max-width: none;
+}
+
+/* 4. TRANSACTION HISTORY ENHANCEMENTS */
+.transaction-card {
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%) !important;
+    border: none !important;
+    border-radius: 16px !important;
+    padding: 20px !important;
+    margin-bottom: 16px !important;
+    box-shadow: 0 4px 20px rgba(99, 102, 241, 0.08) !important;
+    border-left: 4px solid #6366f1 !important;
+    transition: all 0.3s ease !important;
+    position: relative;
+    overflow: hidden;
+}
+
+.transaction-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    border-radius: 0 0 0 60px;
+    opacity: 0.1;
+}
+
+.transaction-card:hover {
+    transform: translateY(-4px) !important;
+    box-shadow: 0 8px 30px rgba(99, 102, 241, 0.15) !important;
+    border-left-color: #8b5cf6 !important;
+}
+
+.transaction-card:nth-child(even) {
+    background: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 100%) !important;
+}
+
+/* Enhanced Table Styling */
+table {
+    background: #ffffff !important;
+    border-radius: 16px !important;
+    overflow: hidden !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08) !important;
+    border: 1px solid #e0e7ff !important;
+}
+
+table th {
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%) !important;
+    color: white !important;
+    padding: 16px 20px !important;
+    font-weight: 700 !important;
+    font-size: 0.95rem !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+}
+
+table td {
+    padding: 16px 20px !important;
+    border-bottom: 1px solid #f1f5f9 !important;
+    font-size: 0.95rem !important;
+    vertical-align: middle !important;
+}
+
+table tbody tr {
+    transition: all 0.3s ease !important;
+}
+
+table tbody tr:hover {
+    background: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 100%) !important;
+    transform: scale(1.01) !important;
+}
+
+.income-indicator {
+    background: linear-gradient(135deg, #10b981, #34d399) !important;
+    color: white !important;
+    padding: 6px 12px !important;
+    border-radius: 20px !important;
+    font-weight: 600 !important;
+    font-size: 0.85rem !important;
+    display: inline-block !important;
+}
+
+.expense-indicator {
+    background: linear-gradient(135deg, #ef4444, #f87171) !important;
+    color: white !important;
+    padding: 6px 12px !important;
+    border-radius: 20px !important;
+    font-weight: 600 !important;
+    font-size: 0.85rem !important;
+    display: inline-block !important;
+}
+
+/* Enhanced Pagination */
+.pagination {
+    display: flex !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    margin: 32px 0 !important;
+    flex-wrap: wrap !important;
+}
+
+.pagination button {
+    padding: 12px 20px !important;
+    border: none !important;
+    border-radius: 12px !important;
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%) !important;
+    color: white !important;
+    font-weight: 600 !important;
+    font-size: 0.9rem !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    min-width: 44px !important;
+}
+
+.pagination button:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4) !important;
+}
+
+.pagination button:disabled {
+    background: #e5e7eb !important;
+    color: #9ca3af !important;
+    cursor: not-allowed !important;
+    transform: none !important;
+}
+
+/* 5. ENHANCED SAVED TRANSACTIONS */
+.st-header {
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%) !important;
+    border-radius: 20px !important;
+    padding: 32px !important;
+    margin-bottom: 32px !important;
+    box-shadow: 0 12px 40px rgba(99, 102, 241, 0.3) !important;
+    position: relative;
+    overflow: hidden;
+}
+
+.st-header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 200px;
+    height: 200px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+}
+
+.st-header h2 {
+    font-size: 2rem !important;
+    font-weight: 800 !important;
+    margin: 0 0 8px 0 !important;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.st-header .add-btn {
+    background: rgba(255, 255, 255, 0.2) !important;
+    border: 2px solid rgba(255, 255, 255, 0.3) !important;
+    backdrop-filter: blur(10px) !important;
+    padding: 14px 28px !important;
+    border-radius: 50px !important;
+    font-weight: 700 !important;
+    font-size: 0.95rem !important;
+    transition: all 0.3s ease !important;
+}
+
+.st-header .add-btn:hover {
+    background: rgba(255, 255, 255, 0.3) !important;
+    transform: translateY(-3px) !important;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2) !important;
+}
+
+.st-list {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)) !important;
+    gap: 24px !important;
+}
+
+.st-card {
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%) !important;
+    border: 1px solid #e0e7ff !important;
+    border-radius: 20px !important;
+    padding: 24px !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08) !important;
+    transition: all 0.3s ease !important;
+    position: relative;
+    overflow: hidden;
+}
+
+.st-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #6366f1, #8b5cf6);
+}
+
+.st-card:hover {
+    transform: translateY(-6px) !important;
+    box-shadow: 0 16px 50px rgba(99, 102, 241, 0.2) !important;
+}
+
+.st-card-info h4 {
+    font-size: 1.3rem !important;
+    font-weight: 800 !important;
+    color: #1f2937 !important;
+    margin: 0 0 8px 0 !important;
+}
+
+.st-card-info p {
+    color: #6b7280 !important;
+    margin: 4px 0 !important;
+    font-size: 0.9rem !important;
+    line-height: 1.5 !important;
+}
+
+.st-card-amount {
+    font-size: 1.6rem !important;
+    font-weight: 900 !important;
+    text-align: right !important;
+}
+
+.st-card-amount.income {
+    background: linear-gradient(135deg, #10b981, #34d399) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+}
+
+.st-card-amount.expense {
+    background: linear-gradient(135deg, #ef4444, #f87171) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+}
+
+.st-card-actions {
+    display: flex !important;
+    gap: 8px !important;
+    margin-top: 20px !important;
+    padding-top: 20px !important;
+    border-top: 1px solid #f3f4f6 !important;
+}
+
+.st-card .btn-confirm {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+    color: white !important;
+    border: none !important;
+    padding: 12px 20px !important;
+    border-radius: 12px !important;
+    font-weight: 600 !important;
+    flex: 2 !important;
+    transition: all 0.3s ease !important;
+}
+
+.st-card .btn-confirm:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4) !important;
+}
+
+.st-card .btn-skip {
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%) !important;
+    color: white !important;
+    border: none !important;
+    padding: 12px 16px !important;
+    border-radius: 12px !important;
+    font-weight: 600 !important;
+    flex: 1 !important;
+    transition: all 0.3s ease !important;
+}
+
+.st-card .btn-skip:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 25px rgba(245, 158, 11, 0.4) !important;
+}
+
+.st-card .btn-edit {
+    background: transparent !important;
+    color: #6366f1 !important;
+    border: 2px solid #6366f1 !important;
+    padding: 12px 16px !important;
+    border-radius: 12px !important;
+    font-weight: 600 !important;
+    flex: 1 !important;
+    transition: all 0.3s ease !important;
+}
+
+.st-card .btn-edit:hover {
+    background: #6366f1 !important;
+    color: white !important;
+    transform: translateY(-2px) !important;
+}
+
+/* Empty State Enhancement */
+.st-empty-state {
+    text-align: center !important;
+    padding: 80px 20px !important;
+    background: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 100%) !important;
+    border-radius: 20px !important;
+    border: 2px dashed #6366f1 !important;
+}
+
+.st-empty-state h3 {
+    font-size: 1.5rem !important;
+    font-weight: 700 !important;
+    color: #6366f1 !important;
+    margin-bottom: 12px !important;
+}
+
+.st-empty-state p {
+    font-size: 1rem !important;
+    color: #6b7280 !important;
+    margin-bottom: 24px !important;
+}
+
+@media (max-width: 900px) {
+    .settings-layout {
+        grid-template-columns: 1fr;
+    }
+    
+    .st-list {
+        grid-template-columns: 1fr !important;
+    }
+    
+    .st-card-actions {
+        flex-direction: column !important;
+    }
+}
+
+/* ===== SAVED TRANSACTIONS PAGE ENHANCEMENTS ===== */
+.saved-transactions-page {
+    padding: 2rem;
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    min-height: 100vh;
+}
+
+.saved-transactions-page .st-top {
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #06b6d4 100%);
+    padding: 2rem;
+    border-radius: 20px;
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 8px 32px rgba(99, 102, 241, 0.15);
+}
+
+.saved-transactions-page .st-top h2 {
+    color: white;
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin: 0;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.saved-transactions-page .st-top button {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 12px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    width: auto;
+}
+
+.saved-transactions-page .st-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 1.5rem;
+}
+
+.saved-transactions-page .st-card {
+    background: white;
+    border-radius: 16px;
+    padding: 0;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    overflow: hidden;
+    border: 1px solid #e2e8f0;
+}
+
+.saved-transactions-page .st-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+}
+
+.st-card-content {
+    padding: 1.5rem;
+}
+
+.st-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+.st-card-category {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #1a202c;
+    margin: 0;
+}
+
+.st-card-amount {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: #6366f1;
+    margin: 0;
+}
+
+.st-card-description {
+    color: #64748b;
+    margin: 0.75rem 0;
+    line-height: 1.5;
+    font-size: 0.95rem;
+}
+
+.st-card-due {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #f1f5f9;
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #475569;
+    margin-bottom: 1rem;
+}
+
+.st-card-due.today {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.st-card-due.overdue {
+    background: #fee2e2;
+    color: #dc2626;
+}
+
+.st-card-actions {
+    display: flex;
+    gap: 0.5rem;
+    padding: 1rem 1.5rem;
+    background: #f8fafc;
+    border-top: 1px solid #e2e8f0;
+    margin: 0 -1.5rem -1.5rem -1.5rem;
+}
+
+.st-action-btn {
+    flex: 1;
+    padding: 0.6rem 1rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: center;
+    width: auto;
+}
+
+.st-action-btn.primary {
+    background: #6366f1;
+    color: white;
+}
+
+.st-action-btn.primary:hover {
+    background: #5856eb;
+    transform: translateY(-1px);
+}
+
+.st-action-btn.secondary {
+    background: white;
+    color: #6366f1;
+    border: 1px solid #e2e8f0;
+}
+
+.st-action-btn.secondary:hover {
+    background: #f8fafc;
+    border-color: #6366f1;
+}
+
+
+
+/* ===== USER PROFILE PAGE ENHANCEMENTS ===== */
+.profile-container {
+    padding: 2rem;
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    min-height: 100vh;
+}
+
+.profile-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+    .profile-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+}
+
+.profile-info-card {
+    background: white;
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e2e8f0;
+    text-align: center;
+}
+
+.profile-security-card {
+    background: white;
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e2e8f0;
+}
+
+.profile-card-title {
+    color: #1a202c;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #f1f5f9;
+}
+
+.profile-image-section {
+    margin-bottom: 2rem;
+}
+
+.profile-image {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin: 0 auto 1rem;
+    border: 4px solid #e2e8f0;
+    object-fit: cover;
+}
+
+.profile-info {
+    text-align: left;
+    margin-top: 1.5rem;
+}
+
+.profile-info-item {
+    margin-bottom: 1rem;
+    padding: 0.75rem;
+    background: #f8fafc;
+    border-radius: 8px;
+}
+
+.profile-info-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.25rem;
+}
+
+.profile-info-value {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1a202c;
+}
+
+.security-form {
+    margin-top: 1rem;
+}
+
+.security-input-group {
+    margin-bottom: 1.5rem;
+}
+
+.security-input-group label {
+    display: block;
+    color: #374151;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.security-input-group input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 2px solid #e2e8f0;
+    border-radius: 10px;
+    font-size: 1rem;
+    background: white;
+    transition: all 0.2s ease;
+}
+
+.security-input-group input:focus {
+    border-color: #6366f1;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.security-actions {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.security-btn {
+    padding: 0.75rem 2rem;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background: #6366f1;
+    color: white;
+    width: auto;
+}
+
+.security-btn:hover {
+    background: #5856eb;
+    transform: translateY(-1px);
+}
+
+.security-btn.loading {
+    opacity: 0.7;
+    cursor: not-allowed;
+}

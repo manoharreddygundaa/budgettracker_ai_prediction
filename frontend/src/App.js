@@ -4,18 +4,19 @@ import './assets/styles/register.css'
 import { Suspense, lazy } from 'react';
 import { Routes, Route, Navigate, Outlet } from "react-router-dom";
 import './assets/styles/user.css'
+import './assets/styles/enhanced-ui.css'
 import Loading from './components/utils/loading';
 import AuthService from './services/auth.service'
 import { ThemeContext, useTheme } from './contexts/ThemeContext.js';
 import NewSavedTransaction from './pages/user/newSavedTransaction.js';
 import SavedTransactions from './pages/user/savedTransactions.js';
 import EditSavedTransaction from './pages/user/editSavedTransaction.js';
+import DashboardLayout from './layouts/DashboardLayout.js';
 
 const Welcome = lazy(() => import('./pages/welcome.js'))
 const Login = lazy(() => import('./pages/auth/login/login.js'))
 const Register = lazy(() => import('./pages/auth/register/register.js'))
-const UserRegistrationVerfication = lazy(() => import('./pages/auth/register/userRegistrationVerification.js'))
-const RegistrationSuccess = lazy(() => import('./pages/auth/register/registrationSuccessfull.js'))
+
 const Dashboard = lazy(() => import('./pages/user/dashboard.js'))
 const Transactions = lazy(() => import("./pages/user/transactions.js"))
 const NewTransaction = lazy(() => import("./pages/user/newTransaction.js"))
@@ -33,10 +34,11 @@ const EditCategory = lazy(() => import('./pages/admin/editCategory.js'))
 const AdminProfile = lazy(() => import('./pages/admin/adminProfile.js'))
 const UserProfile = lazy(() => import('./pages/user/userProfile.js'))
 const UserStatistics = lazy(() => import('./pages/user/statistics.js'))
+const Budgets = lazy(() => import('./pages/Budgets.js'))
+const Savings = lazy(() => import('./pages/Savings.js'))
+const Community = lazy(() => import('./pages/user/community.js'))
 
 function App() {
-
-    const [isDarkMode, toggleTheme] = useTheme()
 
     const ProtectedRoute = ({ isAllowed, redirectPath = '/unauthorized', children }) => {
         if (!isAllowed) {
@@ -48,28 +50,29 @@ function App() {
 
     return (
         <Suspense fallback={<LoadingSpinner />}>
-            <ThemeContext.Provider value={{ isDarkMode, toggleTheme }}>
-                <RoutesWrapper isDarkMode={isDarkMode}>
+            <div className="light">
                     <Routes>
                         <Route element={<ProtectedRoute isAllowed={!AuthService.getCurrentUser()} />}>
-                            <Route path="/auth/userRegistrationVerfication/:email" element={<UserRegistrationVerfication />} />
-                            <Route path="/auth/success-registration" element={<RegistrationSuccess />} />
                             <Route path='/auth/forgetpassword/verifyEmail' element={<ForgotPasswordEmailVerfication />} />
                             <Route path='/auth/forgotPassword/verifyAccount/:email' element={<ForgotPasswordCodeVerification />} />
                             <Route path='/auth/forgotPassword/resetPassword/:email' element={<ForgotPasswordChangePassword />} />
                         </Route>
 
                         <Route element={<ProtectedRoute isAllowed={AuthService.getCurrentUser() && AuthService.getCurrentUser().roles.includes("ROLE_USER")} />}>
-                            <Route path="/user/dashboard" element={<Dashboard />} />
-                            <Route path="/user/newTransaction" element={<NewTransaction />} />
-                            <Route path="/user/transactions" element={<Transactions />} />
-                            <Route path="/user/newTransaction" element={<NewTransaction />} />
-                            <Route path="/user/editTransaction/:transactionId" element={<EditTransaction />} />
-                            <Route path="/user/savedTransactions" element={<SavedTransactions />} />
-                            <Route path="/user/savedTransactions/new" element={<NewSavedTransaction />} />
-                            <Route path="/user/editSavedTransaction/:transactionId" element={<EditSavedTransaction />} />
-                            <Route path='/user/statistics' element={<UserStatistics />} />
-                            <Route path='/user/settings' element={<UserProfile />} />
+                            <Route path="/user" element={<DashboardLayout />}>
+                                <Route path="dashboard" element={<Dashboard />} />
+                                <Route path="newTransaction" element={<NewTransaction />} />
+                                <Route path="transactions" element={<Transactions />} />
+                                <Route path="editTransaction/:transactionId" element={<EditTransaction />} />
+                                <Route path="savedTransactions" element={<SavedTransactions />} />
+                                <Route path="savedTransactions/new" element={<NewSavedTransaction />} />
+                                <Route path="editSavedTransaction/:transactionId" element={<EditSavedTransaction />} />
+                                <Route path="statistics" element={<UserStatistics />} />
+                                <Route path="budgets" element={<Budgets />} />
+                                <Route path="savings" element={<Savings />} />
+                                <Route path="community" element={<Community />} />
+                                <Route path="settings" element={<UserProfile />} />
+                            </Route>
                         </Route>
 
                         <Route element={<ProtectedRoute isAllowed={AuthService.getCurrentUser() && AuthService.getCurrentUser().roles.includes("ROLE_ADMIN")} />}>
@@ -87,21 +90,10 @@ function App() {
                         <Route path="/unauthorized" element={<UnAuthorizedAccessPage />} />
                         <Route path="*" element={<NotFoundPage />} />
                     </Routes>
-                </RoutesWrapper>
-            </ThemeContext.Provider>
+            </div>
         </Suspense>
 
     );
-}
-
-
-function RoutesWrapper({ children, isDarkMode }) {
-    return (
-        <div className={isDarkMode ? "dark" : "light"}>
-            {children}
-        </div>
-    )
-
 }
 
 function LoadingSpinner() {

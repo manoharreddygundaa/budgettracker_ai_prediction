@@ -1,62 +1,342 @@
-.hero-section {
-    height: 100dvh;
-    padding: 0 50px;
+.welcome-container {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    position: relative;
+    overflow-x: hidden;
+}
+
+.welcome-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1" fill="%23ffffff" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23dots)"/></svg>') repeat;
+    animation: float 30s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(1deg); }
+}
+
+.welcome-nav {
     display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    justify-content: center;
-    background-image: url('../images/bg.png');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: right;
-    z-index: 1;
-}
-.hero-section h4 {
-    color:var(--main);margin-bottom: 15px;
-}
-.hero-section h1 {
-    font-size: 40px;margin-bottom: 25px;
-}
-.hero-section h3 {
-    font-size: 40px;
-    width: 100%;
-    max-width: 750px;
-    text-align: right;
-    margin: 20px 0;
-}
-.hero-section div {
-   display: inline-flex;
-   gap: 15px;
-
-}
-.hero-section div button {
-    width: max-content;
-    padding: 10px 30px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 50px;
+    position: relative;
+    z-index: 10;
 }
 
-@media all and (max-width:768px) {
-    .hero-section  {
-        padding: 0 15px;
-        padding-right: 25px;
-    }
-    .hero-section h3 {
-        font-size: 25px;
-    }
-    .hero-section h1 {
-        font-size: 35px;
-    }
-    .hero-section div button {
-        padding: 10px 15px;
-    }
+.nav-buttons {
+    display: flex;
+    gap: 15px;
 }
 
-main {
+.nav-btn {
+    padding: 12px 24px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.login-btn {
+    color: white;
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.login-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+.register-btn {
+    background: white;
+    color: #667eea;
+}
+
+.register-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.hero-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 80px 50px;
+    position: relative;
+    z-index: 5;
+    min-height: 80vh;
+}
+
+.hero-content {
+    flex: 1;
+    max-width: 600px;
+}
+
+.hero-badge {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    color: white;
+    padding: 8px 20px;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: white;
+    line-height: 1.1;
+    margin-bottom: 30px;
+}
+
+.gradient-text {
+    background: linear-gradient(45deg, #ffd89b 0%, #19547b 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.hero-description {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.6;
+    margin-bottom: 40px;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 60px;
+}
+
+.cta-primary {
+    background: white;
+    color: #667eea;
+    padding: 16px 32px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.cta-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+}
+
+.cta-secondary {
+    background: transparent;
+    color: white;
+    padding: 16px 32px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    transition: all 0.3s ease;
+}
+
+.cta-secondary:hover {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+.hero-stats {
+    display: flex;
+    gap: 40px;
+}
+
+.stat {
+    text-align: center;
+}
+
+.stat-number {
+    display: block;
+    font-size: 2rem;
+    font-weight: 800;
+    color: white;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.hero-visual {
+    flex: 1;
+    position: relative;
+    height: 500px;
+}
+
+.floating-card {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    min-width: 280px;
+}
+
+.card-1 {
+    top: 50px;
+    right: 100px;
+    animation: floatCard1 6s ease-in-out infinite;
+}
+
+.card-2 {
+    top: 200px;
+    right: 50px;
+    animation: floatCard2 6s ease-in-out infinite 2s;
+}
+
+.card-3 {
+    top: 350px;
+    right: 120px;
+    animation: floatCard3 6s ease-in-out infinite 4s;
+}
+
+@keyframes floatCard1 {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-15px) rotate(1deg); }
+}
+
+@keyframes floatCard2 {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(-1deg); }
+}
+
+@keyframes floatCard3 {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-10px) rotate(0.5deg); }
+}
+
+.card-icon {
+    font-size: 2rem;
+    width: 60px;
+    height: 60px;
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 100vh;flex-direction: column;gap: 25px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 15px;
+    flex-shrink: 0;
 }
-main h3{
-    max-width: 500px;
-    width: 100%;text-align: center;
+
+.card-content h4 {
+    margin: 0 0 5px 0;
+    color: #2d3748;
+    font-weight: 700;
+}
+
+.card-content p {
+    margin: 0;
+    color: #718096;
+    font-size: 0.9rem;
+}
+
+.features-section {
+    padding: 80px 50px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    position: relative;
+    z-index: 5;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.feature-card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    border-radius: 20px;
+    padding: 40px 30px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    transition: all 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+}
+
+.feature-icon {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.feature-card h3 {
+    color: #2d3748;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.feature-card p {
+    color: #718096;
+    line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+    .welcome-nav {
+        padding: 15px 20px;
+    }
+    
+    .hero-section {
+        flex-direction: column;
+        padding: 40px 20px;
+        text-align: center;
+    }
+    
+    .hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .hero-stats {
+        justify-content: center;
+    }
+    
+    .hero-visual {
+        display: none;
+    }
+    
+    .features-section {
+        padding: 40px 20px;
+    }
+    
+    .nav-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
 }

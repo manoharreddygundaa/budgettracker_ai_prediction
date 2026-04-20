@@ -6,7 +6,7 @@ import Header from '../../components/utils/header';
 import Loading from '../../components/utils/loading';
 import useCategories from '../../hooks/useCategories';
 import Info from '../../components/utils/Info';
-import Container from '../../components/utils/Container';
+
 import toast, { Toaster } from 'react-hot-toast';
 import SavedTransactionForm from '../../components/userTransactions/SavedTransactionForm';
 
@@ -46,7 +46,7 @@ function NewSavedTransaction() {
 
 
     return (
-        <Container activeNavId={11}>
+        <>
             <Header title="New Transaction" />
             <Toaster/>
             {(isFetching) && <Loading />}
@@ -63,7 +63,7 @@ function NewSavedTransaction() {
                     </>
                 )
             }
-        </Container>
+        </>
     )
 }
 

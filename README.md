@@ -97,9 +97,9 @@ The AI model achieves:
 ## 👨‍💻 Developer
 
 **Your Name**
-- LinkedIn: [Your LinkedIn Profile]
-- GitHub: [Your GitHub Profile]
-- Email: [Your Email]
+- LinkedIn: https://www.linkedin.com/in/gunda-manoharreddy-00409027a/
+- GitHub: (https://github.com/manoharreddygundaa/budgettracker_ai_prediction)
+- Email: gundamanoharreddy15@gmail.com
 
 ## 📄 License
 

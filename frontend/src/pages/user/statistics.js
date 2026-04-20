@@ -5,19 +5,22 @@ import useExpenseVsIncomeSummary from '../../hooks/useExpenseVsIncomeSummary';
 import Info from "../../components/utils/Info";
 import Container from "../../components/utils/Container";
 import toast, { Toaster } from "react-hot-toast";
+import { useMemo } from "react";
 
 function UserStatistics() {
-    const months = getMonths()
+    const months = useMemo(() => getMonths(), [])
     const [data, isLoading, isError] = useExpenseVsIncomeSummary(months)
 
     return (
         <Container activeNavId={9}>
             <Header title="Statistics" />
             <Toaster/>
-            {(isLoading) && <Loading />}
-            {(isError) && toast.error("Failed to fetch information. Try again later!") }
-            {(isError) && <Info text="No data found!" />}
-            {(!isError) && <IncomeVsExpenseChart data={data} />}
+            <div className="statistics-page-wrapper">
+                {(isLoading) && <Loading />}
+                {(isError) && toast.error("Failed to fetch information. Try again later!") }
+                {(isError) && <Info text="No data found!" />}
+                {(!isError) && <IncomeVsExpenseChart key="income-expense-chart" data={data} />}
+            </div>
         </Container>
     )
 }

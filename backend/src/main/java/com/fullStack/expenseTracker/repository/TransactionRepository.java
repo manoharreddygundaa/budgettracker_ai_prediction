@@ -106,4 +106,23 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
     List<Transaction> findByUserIdAndDateBetween(@Param("userId") Long userId, 
                                                 @Param("startDate") String startDate, 
                                                 @Param("endDate") String endDate);
+
+    @Query("SELECT t FROM Transaction t WHERE t.user.id = :userId ORDER BY t.date DESC")
+    List<Transaction> findAllByUserId(@Param("userId") Long userId);
+
+    @Query(value = "SELECT t.*, c.category_id AS c_category_id, c.category_name AS c_category_name, " +
+            "u.id AS u_id, u.email AS u_email, " +
+            "tt.transaction_type_id AS tt_transaction_type_id, tt.transaction_type_name AS tt_transaction_type_name " +
+            "FROM transaction t " +
+            "JOIN category c ON t.category_id = c.category_id " +
+            "JOIN users u ON t.user_id = u.id " +
+            "JOIN transaction_type tt ON c.transaction_type_id = tt.transaction_type_id " +
+            "WHERE u.id = :userId AND t.date >= :startDate AND t.date <= :endDate " +
+            "AND tt.transaction_type_name = :type " +
+            "ORDER BY t.date DESC",
+            nativeQuery = true)
+    List<Transaction> findByUserIdAndDateBetweenAndType(@Param("userId") Long userId, 
+                                                       @Param("startDate") String startDate, 
+                                                       @Param("endDate") String endDate,
+                                                       @Param("type") String type);
 }

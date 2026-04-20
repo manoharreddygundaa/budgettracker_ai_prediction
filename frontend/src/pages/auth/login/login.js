@@ -8,12 +8,23 @@ import Logo from '../../../components/utils/Logo';
 function Login() {
 
     const navigate = useNavigate();
+    const [successMessage, setSuccessMessage] = useState("");
 
     useEffect(() => {
         if (AuthService.getCurrentUser() && AuthService.getCurrentUser().roles.includes("ROLE_USER")) {
             navigate("/user/dashboard");
         }else if (AuthService.getCurrentUser() && AuthService.getCurrentUser().roles.includes("ROLE_ADMIN")) {
             navigate("/admin/transactions");
+        }
+        
+        // Check for success message from registration
+        const message = localStorage.getItem("message");
+        if (message) {
+            const parsedMessage = JSON.parse(message);
+            if (parsedMessage.status === "SUCCESS") {
+                setSuccessMessage(parsedMessage.text);
+                localStorage.removeItem("message");
+            }
         }
     }, [])
 
@@ -54,16 +65,20 @@ function Login() {
     return(
         <div className='container'>
             <form className="auth-form"  onSubmit={handleSubmit(onSubmit)}>
-            <Logo/>
-                <h2>Login</h2>
+                <Logo/>
+                <h2>Welcome Back! 👋</h2>
+                {
+                    (successMessage !== "") && <p className="success-message">{successMessage}</p>
+                }
                 {
                     (response_error!=="") && <p>{response_error}</p>
                 }
                 
                 <div className='input-box'>
-                    <label>Email</label><br/>
+                    <label>📧 Email Address</label>
                     <input 
-                        type='text'
+                        type='email'
+                        placeholder="Enter your email"
                         {...register('email', {
                             required: "Email is required!",
                             pattern: {value:/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g, message:"Invalid email address!"}
@@ -73,9 +88,10 @@ function Login() {
                 </div>
                 
                 <div className='input-box'>
-                    <label>Password</label><br/>
+                    <label>🔒 Password</label>
                     <input 
                         type='password'
+                        placeholder="Enter your password"
                         {
                             ...register('password', {
                                 required: 'Password is required!'
@@ -84,14 +100,19 @@ function Login() {
                     />
                     {formState.errors.password && <small>{formState.errors.password.message}</small>}
                 </div>
-                <div className='msg'> <Link to={'/auth/forgetpassword/verifyEmail'} className='inline-link'>Forgot password?</Link></div><br/>
+                
+                <div className='msg'>
+                    <Link to={'/auth/forgetpassword/verifyEmail'}>Forgot password?</Link>
+                </div>
                 
                 <div className='input-box'>
-                    <input type='submit' value={isLoading ? "Logging in..." : 'Login'}
-                        className={isLoading ? "button button-fill loading" : "button button-fill"}
+                    <input type='submit' value={isLoading ? "Signing in..." : 'Sign In'}
+                        className={isLoading ? "loading" : ""}
+                        disabled={isLoading}
                     />
                 </div>
-                <br/><div className='msg'>New member? <Link to='/auth/register' className='inline-link'>Register Here</Link></div>
+                
+                <div className='msg'>New to SmartFinance? <Link to='/auth/register'>Create Account</Link></div>
             </form>
         </div>
     )

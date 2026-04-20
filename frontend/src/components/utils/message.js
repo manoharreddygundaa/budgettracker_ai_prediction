@@ -22,7 +22,7 @@ const Message = memo(({ message }) => {
             {
                 msg &&
                     <div className={msg.status === "SUCCESS" ? 'msg-wrapper success' : 'msg-wrapper fail'}>
-                        <p>{msg.text}</p><span onClick={closeMsg}><i class='fa fa-times'></i></span>
+                        <p>{msg.text}</p><span onClick={closeMsg}><i className='fa fa-times'></i></span>
                     </div> 
             }
         

@@ -23,7 +23,7 @@ function useExpenseVsIncomeSummary(months) {
         }
 
         getData()
-    }, [months])
+    }, [])
 
     const generateData = (fetchedData) => {
         const finalData = months.map(({ id, monthName }) => {

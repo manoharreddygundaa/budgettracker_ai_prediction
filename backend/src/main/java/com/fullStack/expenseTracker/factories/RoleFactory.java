@@ -21,5 +21,4 @@ public class RoleFactory {
         }
         throw new RoleNotFoundException("Invalid role name: " + role);
     }
-
 }

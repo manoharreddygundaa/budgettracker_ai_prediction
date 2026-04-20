@@ -1,0 +1,51 @@
+.t-type-wrapper {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 700px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.t-type-wrapper h3 {
+    margin: 0 0 15px 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #374151;
+}
+
+.t-type-list {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    background: #f8fafc;
+    padding: 8px;
+    border-radius: 10px;
+}
+
+.t-type-list button {
+    flex: 1;
+    max-width: 200px;
+    padding: 12px 24px;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    background: transparent;
+    color: #6b7280;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.t-type-list button:hover {
+    background: rgba(99, 102, 241, 0.1);
+    color: #6366f1;
+}
+
+.t-type-list button.active {
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+    color: white;
+    border-color: #6366f1;
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+}

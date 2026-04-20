@@ -6,7 +6,7 @@ import com.fullStack.expenseTracker.exceptions.UserNotFoundException;
 import com.fullStack.expenseTracker.exceptions.UserServiceLogicException;
 import com.fullStack.expenseTracker.services.BudgetService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -28,9 +28,9 @@ public class BudgetController {
 
     @GetMapping("/get")
     @PreAuthorize("hasRole('ROLE_USER')")
-    public ResponseEntity<ApiResponseDto<?>> getBudgetByMonth(@Param("userId") long userId,
-                                                              @Param("month") int month,
-                                                              @Param("year") long year)
+    public ResponseEntity<ApiResponseDto<java.util.Map<String,Double>>> getBudgetByMonth(@RequestParam("userId") long userId,
+                                                              @RequestParam("month") int month,
+                                                              @RequestParam("year") long year)
             throws UserServiceLogicException {
         return budgetService.getBudgetByMonth(userId, month, year);
     }
