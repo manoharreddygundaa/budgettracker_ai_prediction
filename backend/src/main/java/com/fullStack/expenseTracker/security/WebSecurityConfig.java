@@ -60,31 +60,7 @@ public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
         .authorizeHttpRequests(auth ->
             auth
-                // ✅ PUBLIC AUTH ENDPOINTS (VERY IMPORTANT)
-                .requestMatchers(
-                        "/auth/**",
-                        "/api/auth/**",
-                        "/mywallet/auth/**"
-                ).permitAll()
-
-                // ✅ PROTECTED (example - keep if needed)
-                .requestMatchers("/mywallet/export/**", "/export/**", "/api/export/**").authenticated()
-
-                // ⚠️ TEMP: allow other APIs (you can secure later)
-                .requestMatchers(
-                        "/mywallet/transactiontype/**",
-                        "/mywallet/category/**",
-                        "/mywallet/transaction/**",
-                        "/mywallet/user/**",
-                        "/api/savings/**",
-                        "/budget/**",
-                        "/forum/**",
-                        "/predictions/**",
-                        "/saved/**",
-                        "/report/**"
-                ).permitAll()
-
-                // 🔒 everything else protected
+                .requestMatchers("/**/auth/**").permitAll()  // 🔥 key fix
                 .anyRequest().authenticated()
         );
 
